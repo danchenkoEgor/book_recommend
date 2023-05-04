@@ -21,7 +21,7 @@ emb = load('final_emb.joblib')
 
 def recomendation(input):
 
-    user_input = embed_bert_cls(input, model, tokenizer)
+    user_input = embed_bert_cls(input, model_k, tokenizer_k)
     label = kmeans.predict(user_input.reshape(1, -1))[0]
     sample_df = emb[emb['labels'] == label].copy()
     sample_df['cosine'] = sample_df['embeddings'].apply(lambda x: np.dot(x, user_input) / (np.linalg.norm(x) * np.linalg.norm(user_input)))
