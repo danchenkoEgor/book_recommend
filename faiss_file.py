@@ -28,7 +28,7 @@ def embed_bert_cls(text, model, tokenizer):
     return embeddings[0].cpu().numpy()
 
 ### функция ниже отдает готовый датасет с рекомендациями книг
-def reccomend(input_string,n_neighbors=5):
+def recommend(input_string,n_neighbors=5):
 
     ### input_string - то, что вводит пользователь в аннотации, эмбеддинг пользовательского текста
     question_embedding = embed_bert_cls([input_string], model, tokenizer)
@@ -50,8 +50,8 @@ def reccomend(input_string,n_neighbors=5):
 ### конечный датасет: samples_df 
 
 
-input = st.text_input('Your text here:', )
+user_input = st.text_input('Your text here:', )
 number = st.number_input('Insert a number', min_value = 1, max_value = 5, value = 3)
 
-if len(input) > 1:
-    st.write(reccomend(input, number))
+if len(user_input) > 1:
+    st.write(recommend(user_input, number))
